@@ -1,0 +1,13 @@
+https://console.developers.google.com/
+-- crate new application
+1- go to API Library
+2- Cloud Translation API and enable it --> Billing required  
+**create Credentials  API Keys   
+'AIzaSyDSJDwK6XYPT5hSCcp7KCelcd0YXbDYSCM'
+'AIzaSyDSJDwK6XYPT5hSCcp7KCelcd0YXbDYSCM'
+
+
+npm install @google-cloud/translate
+npm i google-translate
+
+https://dev.to/robertchen/how-to-use-google-translate-api-27l9
