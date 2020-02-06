@@ -6,8 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import { saveState } from './store/localStorage';
 import { Provider } from 'react-redux';
 import configureStore from './store/store';
-//import throttle from 'lodash.throttle';
 import _ from 'lodash';
+
 const store = configureStore();
 
 ReactDOM.render(
@@ -16,19 +16,9 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'));
 
-// store.subscribe(() => {
-//     saveState({
-//         currentUser: store.getState().currentUser
-//     });
-// });
-
 store.subscribe(_.throttle(() => {
     saveState({
         currentUser: store.getState().currentUser
     });
 }, 1000));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

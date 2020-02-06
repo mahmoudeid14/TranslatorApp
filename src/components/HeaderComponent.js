@@ -12,21 +12,16 @@ class HeaderComponent extends React.Component {
     }
     render() {
         return (<header>
-            <Navbar expand="lg" variant="dark" bg="dark">
-                <Navbar.Brand href="#home">Language Translator
+            <Navbar  variant="dark" bg="dark">
+                <Navbar.Brand href="#">Language Translator
                  {this.props.currentUser.isLogin == true ?
                         <span> Welecom {this.props.currentUser.userName}</span>
                         : null}
+                    {this.props.currentUser.isLogin == true ?
+                        <Button style={{ marginLeft: 10 }} variant="link" onClick={this.doLogout}>Logout</Button>
+                        : null}
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Form inline>
-                        {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                        {this.props.currentUser.isLogin == true ?
-                            <Button variant="outline-success" onClick={this.doLogout}>Logout</Button>
-                            : null}
-                    </Form>
-                </Navbar.Collapse>
             </Navbar>
         </header>);
     }
@@ -42,10 +37,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      logout: () => {
-        dispatch(logoutAction())
-      }
+        logout: () => {
+            dispatch(logoutAction())
+        }
     }
-  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent)

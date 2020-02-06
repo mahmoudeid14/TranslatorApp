@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Table } from 'react-bootstrap';
 import Languages from '../helpers/languages.json';
 import { Grid, GridColumn as Column } from '@progress/kendo-react-grid';
+import { deleteTranslation } from '../actions/userActions';
 
 class UserTranslationsComponent extends React.Component {
     constructor(props) {
@@ -27,10 +28,30 @@ class UserTranslationsComponent extends React.Component {
                     total={this.props.currentUser.translations.length}
                     pageable={true}
                     onPageChange={this.pageChange}>
-                    <Column field="sourceLanguage.Name" title="Source Language" />
-                    <Column field="inputText" title="input Text" />
-                    <Column field="targetLanguage.Name" title="Target Language" />
+                    <Column field="Id" title="Id" width="50"/>
+                    <Column field="dictionary.Name" title="Dictionary" />
+                    <Column field="sourceLanguage.name" title="Source Language" />
+                    <Column field="inputText" title="Input Text" />
+                    <Column field="targetLanguage.name" title="Target Language" />
                     <Column field="outputText" title="Translation" />
+                    <Column field="outputText" title=" " 
+                        cell={(row) => (
+
+                            <td>
+                                <Button variant="outline-secondary" onClick={() => {
+                                   // this.props.play(row.dataItem.targetLanguage,row.dataItem.outputText);
+                                }} >Play</Button>
+                            </td>
+                        )} />
+                    <Column field="Id" title=" " 
+                        cell={(row) => (
+
+                            <td>
+                                <Button variant="outline-danger" onClick={() => {
+                                    this.props.delete(row.dataItem.Id);
+                                }} >Delete</Button>
+                            </td>
+                        )} />
                 </Grid>
             </div>
         </div>);
@@ -44,4 +65,11 @@ const mapStateToProps = state => {
         currentUser: state.currentUser
     }
 }
-export default connect(mapStateToProps)(UserTranslationsComponent)
+const mapDispatchToProps = dispatch => {
+    return {
+        delete: (Id) => {
+            dispatch(deleteTranslation(Id))
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(UserTranslationsComponent)
